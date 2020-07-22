@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/mitchellh/goamz/aws"
-	"github.com/mitchellh/goamz/ec2"
+	"github.com/joyongjin/goamz/aws"
+	"github.com/joyongjin/goamz/ec2"
 	"log"
 	"net"
 	"regexp"
