@@ -157,7 +157,17 @@ can use whatever distro you like the most.
     sudo setcap cap_net_bind_service=+ep /usr/bin/aws-name-server
     ```
 
-### 5. Configure supervisor.
+### 5. Configure dns server
+
+First, you need change aws ec2 default dns server.
+
+1. Open `/etc/resolv.conf`
+2. Remove `nameserver 127.0.0.53`
+3. Add `nameserver 8.8.8.8` and `nameserver 1.1.1.1`
+4. run command `sudo systemsct stop systemd-resolved` for stop aws default dns resolver
+
+
+### 6. Configure supervisor
 
 If you use supervisor you can use the provided supervisor script.
 You'll need to change the script to reflect your hostname:
@@ -167,7 +177,7 @@ You'll need to change the script to reflect your hostname:
 3. `sudo cp supervisor/aws-name-server.conf /etc/supervisor/conf.d`
 4. `sudo supervisorctl update`
 
-### 6. Configure NS Records
+### 7. Configure NS Records
 
 To add your DNS server into the global DNS tree, you need to add an `NS` record
 from the parent domain to your new server.
