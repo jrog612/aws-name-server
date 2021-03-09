@@ -1,0 +1,12 @@
+[Unit]
+Description=Aws name server service
+
+[Service]
+ExecStart=/usr/bin/aws-name-server --domain ____YOUR_DOMAIN_HERE___
+KillMode=process
+StandardOutput=syslog
+StandardError=syslog
+Restart=on-failure
+RestartSec=10
+User=nobody
+Group=nogroup

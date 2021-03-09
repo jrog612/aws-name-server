@@ -64,6 +64,16 @@ These instructions assume you're going to launch a new EC2 instance to run
 `aws-name-server`. If you want to run it on an existing server, adapt the
 instructions to suit.
 
+### 0. Go setting
+
+```
+git clone https://github.com/udhos/update-golang.git && cd update-golang && sudo ./update-golang.sh
+echo "export GOPATH=$HOME/go" >> ~/.bashrc
+echo "export GOROOT=/usr/local/go" >> ~/.bashrc
+echo "export PATH=$PATH:$GORROT/bin:$GOPATH/bin" >> ~/.bashrc
+```
+
+
 ### 1. Create an IAM role
 
 [IAM Roles](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)
@@ -120,13 +130,15 @@ can use whatever distro you like the most.
 7. Select an existing security group `sg-aws-name-server`.
 8. Launch!
 
-### 4. Install the binary
+### 4. Build binary
 
-1.  Download the [latest version](http://gobuild.io/download/github.com/ConradIrwin/aws-name-server/master).
+1.  Clone this repository and build
 
     ```
-    wget http://gobuild.io/github.com/ConradIrwin/aws-name-server/master/linux/amd64 -O aws-name-server.zip
-    unzip aws-name-server.zip
+    git clone https://github.com/joyongjin/aws-name-server.git && cd aws-name-server
+    go mod init aws-name-server
+    go get github.com/joyongjin/goamz/aws github.com/joyongjin/goamz/ec2 github.com/miekg/dns
+    go build
     ```
 
 2. Move the binary into /usr/bin.
