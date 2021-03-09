@@ -64,6 +64,17 @@ These instructions assume you're going to launch a new EC2 instance to run
 `aws-name-server`. If you want to run it on an existing server, adapt the
 instructions to suit.
 
+### 0. Go setting
+
+```
+git clone https://github.com/udhos/update-golang.git && cd update-golang && sudo ./update-golang.sh
+echo "export GOPATH=$HOME/go" >> ~/.bashrc
+echo "export GOROOT=/usr/local/go" >> ~/.bashrc
+echo "export PATH=$PATH:$GORROT/bin:$GOPATH/bin" >> ~/.bashrc
+```
+
+
+
 ### 1. Create an IAM role
 
 [IAM Roles](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html)
@@ -120,13 +131,15 @@ can use whatever distro you like the most.
 7. Select an existing security group `sg-aws-name-server`.
 8. Launch!
 
-### 4. Install the binary
+### 4. Build binary from source
 
-1.  Download the [latest version](http://gobuild.io/download/github.com/ConradIrwin/aws-name-server/master).
+1.  Clone this repository and build
 
     ```
-    wget http://gobuild.io/github.com/ConradIrwin/aws-name-server/master/linux/amd64 -O aws-name-server.zip
-    unzip aws-name-server.zip
+    git clone https://github.com/joyongjin/aws-name-server.git && cd aws-name-server
+    go mod init aws-name-server
+    go get github.com/joyongjin/goamz/aws github.com/joyongjin/goamz/ec2 github.com/miekg/dns
+    go build
     ```
 
 2. Move the binary into /usr/bin.
@@ -144,14 +157,15 @@ can use whatever distro you like the most.
     sudo setcap cap_net_bind_service=+ep /usr/bin/aws-name-server
     ```
 
-### 5. Configure upstart.
+### 5. Configure supervisor.
 
-If you use upstart (the default process manager under ubuntu) you can use the provided upstart
-script. You'll need to change the script to reflect your hostname:
+If you use supervisor you can use the provided supervisor script.
+You'll need to change the script to reflect your hostname:
 
-1. Open upstart/aws-name-server.conf and change --domain=internal to --domain &lt;your-domain>
-2. `sudo cp upstart/aws-name-server.conf /etc/init/`
-3. `sudo initctl start aws-name-server`
+1. Open supervisor/aws-name-server.conf and change --domain=internal to --domain <your-domain>
+2. `sudo apt install -y supervisor`
+3. `sudo cp supervisor/aws-name-server.conf /etc/supervisor/conf.d`
+4. `sudo supervisorctl update`
 
 ### 6. Configure NS Records
 
