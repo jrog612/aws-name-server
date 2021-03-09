@@ -193,7 +193,7 @@ There's a lot that can go wrong, so troubleshooting takes a while.
 
 ### Did it start?
 
-First try looking in the logs (`/var/log/upstart/aws-name-server.log` if you're
+First try looking in the logs (`/var/log/aws-name-server.log` if you're
 using upstart). If there's nothing there, then try `/var/log/syslog`.
 
 ### Is it running?
