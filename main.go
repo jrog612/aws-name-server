@@ -8,7 +8,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/joyongjin/goamz/aws"
+	"github.com/jrog612/goamz/aws"
 )
 
 const USAGE = `Usage: aws-name-server --domain <domain>

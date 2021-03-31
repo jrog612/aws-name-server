@@ -136,9 +136,9 @@ can use whatever distro you like the most.
 1.  Clone this repository and build
 
     ```
-    git clone https://github.com/joyongjin/aws-name-server.git && cd aws-name-server
+    git clone https://github.com/jrog612/aws-name-server.git && cd aws-name-server
     go mod init aws-name-server
-    go get github.com/joyongjin/goamz/aws github.com/joyongjin/goamz/ec2 github.com/miekg/dns
+    go get github.com/jrog612/goamz/aws github.com/jrog612/goamz/ec2 github.com/miekg/dns
     go build
     ```
 
