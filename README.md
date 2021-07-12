@@ -164,7 +164,7 @@ First, you need change aws ec2 default dns server.
 1. Open `/etc/resolv.conf`
 2. Remove `nameserver 127.0.0.53`
 3. Add `nameserver 8.8.8.8` and `nameserver 1.1.1.1`
-4. run command `sudo systemsct stop systemd-resolved` for stop aws default dns resolver
+4. run command `sudo systemctl stop systemd-resolved` for stop aws default dns resolver
 
 
 ### 6. Configure supervisor
@@ -172,7 +172,7 @@ First, you need change aws ec2 default dns server.
 If you use supervisor you can use the provided supervisor script.
 You'll need to change the script to reflect your hostname:
 
-1. Open supervisor/aws-name-server.conf and change --domain=internal to --domain <your-domain>
+1. Open `supervisor/aws-name-server.conf` and change domain option value
 2. `sudo apt install -y supervisor`
 3. `sudo cp supervisor/aws-name-server.conf /etc/supervisor/conf.d`
 4. `sudo supervisorctl update`
